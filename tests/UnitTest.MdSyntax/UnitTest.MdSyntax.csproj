@@ -34,4 +34,11 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="ApprovalTests" Version="7.0.0" />
+    <PackageReference Update="Microsoft.NET.Test.Sdk" Version="18.3.0" />
+    <PackageReference Update="nunit" Version="4.5.0" />
+    <PackageReference Update="NUnit3TestAdapter" Version="6.1.0" />
+  </ItemGroup>
 </Project>

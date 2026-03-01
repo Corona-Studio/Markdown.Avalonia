@@ -1,4 +1,5 @@
-﻿using Avalonia.Data;
+﻿using Avalonia;
+using Avalonia.Data;
 using Avalonia.Data.Converters;
 using Avalonia.Markup.Xaml;
 using Avalonia.Markup.Xaml.MarkupExtensions;
@@ -7,7 +8,6 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
 
 namespace Markdown.Avalonia.Extensions
 {
@@ -17,28 +17,28 @@ namespace Markdown.Avalonia.Extensions
 
         public ComplementaryExtension(string colorKey)
         {
-            this._brushName = colorKey;
+            _brushName = colorKey;
         }
 
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
-            var dyExt = new DynamicResourceExtension(_brushName);
+            var brush = new DynamicResourceExtension(_brushName).ProvideValue(serviceProvider) as BindingBase
+                        ?? new Binding { Source = null };
 
-            var brush = dyExt.ProvideValue(serviceProvider);
-
-            return new MultiBinding()
+            return new MultiBinding
             {
-                Bindings = new IBinding[] { brush },
+                Bindings = new List<BindingBase> { brush },
                 Converter = new ComplementaryConverter()
             };
         }
 
         class ComplementaryConverter : IMultiValueConverter
         {
-            public ComplementaryConverter() { }
-
             public object? Convert(IList<object?> values, Type targetType, object? parameter, CultureInfo culture)
             {
+                if (values.Count < 1)
+                    return AvaloniaProperty.UnsetValue;
+
                 Color c;
                 if (values[0] is ISolidColorBrush b)
                     c = b.Color;
@@ -47,16 +47,15 @@ namespace Markdown.Avalonia.Extensions
                 else
                     return values[0];
 
-
                 var rgb = new int[] { c.R, c.G, c.B };
                 var s = rgb.Max() + rgb.Min();
 
                 return new SolidColorBrush(
-                            Color.FromArgb(
-                                c.A,
-                                (byte)(s - c.R),
-                                (byte)(s - c.G),
-                                (byte)(s - c.B)));
+                    Color.FromArgb(
+                        c.A,
+                        (byte)(s - c.R),
+                        (byte)(s - c.G),
+                        (byte)(s - c.B)));
             }
         }
     }
