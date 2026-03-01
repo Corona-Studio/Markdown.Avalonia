@@ -1,13 +1,13 @@
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <PropertyGroup Condition=" '$(OS)' == 'Windows_NT' ">
-    <PackageTargetFrameworks>net10.0;net9.0;net8.0</PackageTargetFrameworks>
-    <DemoAppTargetFrameworks>net10.0;net9.0;net8.0</DemoAppTargetFrameworks>
-    <TestTargetFrameworks>net10.0;net9.0;net8.0</TestTargetFrameworks>
+    <PackageTargetFrameworks>net10.0;net9.0;</PackageTargetFrameworks>
+    <DemoAppTargetFrameworks>net10.0;net9.0;</DemoAppTargetFrameworks>
+    <TestTargetFrameworks>net10.0;net9.0;</TestTargetFrameworks>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(IS_WHISTYUN_PC)' == 'Y' ">
-    <TestTargetFrameworks>net10.0;net9.0;net8.0</TestTargetFrameworks>
+    <TestTargetFrameworks>net10.0;net9.0;</TestTargetFrameworks>
   </PropertyGroup>
 
   <PropertyGroup>
