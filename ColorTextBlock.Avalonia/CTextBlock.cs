@@ -1,4 +1,4 @@
-﻿
+
 using Avalonia;
 using Avalonia.Automation.Peers;
 using Avalonia.Collections;
@@ -9,7 +9,6 @@ using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Metadata;
 using Avalonia.Rendering.Composition;
-using Avalonia.Utilities;
 using Avalonia.VisualTree;
 using ColorTextBlock.Avalonia.Geometries;
 using System;
@@ -597,7 +596,7 @@ namespace ColorTextBlock.Avalonia
 
                 indicator.Control.Arrange(new Rect(indicator.Left, indicator.Top, indicator.Width, indicator.Height));
             }
-            if (MathUtilities.AreClose(_constraint.Width, finalSize.Width))
+            if (Math.Abs(_constraint.Width - finalSize.Width) < 1e-10)
             {
                 return finalSize;
             }
@@ -610,7 +609,7 @@ namespace ColorTextBlock.Avalonia
 
         protected override Size MeasureOverride(Size availableSize)
         {
-            if (_measured.Width == 0d || !MathUtilities.AreClose(availableSize.Width, _constraint.Width) || _measureRequested)
+            if (_measured.Width == 0d || Math.Abs(availableSize.Width - _constraint.Width) >= 1e-10 || _measureRequested)
             {
                 _measureRequested = false;
                 _constraint = availableSize;
