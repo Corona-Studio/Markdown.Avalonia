@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <AvaloniaVersion>12.0.0-rc2</AvaloniaVersion>
-    <DemoAvaloniaVersion>12.0.0-rc2</DemoAvaloniaVersion>
+    <AvaloniaVersion>12.0.0</AvaloniaVersion>
+    <DemoAvaloniaVersion>12.0.0</DemoAvaloniaVersion>
     <EnableAvaloniaEdit>enabled</EnableAvaloniaEdit>
     <AvaloniaEditVersion>11.4.1</AvaloniaEditVersion>
     <AvaloniaSvgVersion>11.3.0</AvaloniaSvgVersion>
